@@ -6,6 +6,7 @@ from airflow.models import DAG
 # Operators; we need this to operate!
 # from airflow.operators.python import PythonOperator
 from airflow.operators.python_operator import PythonOperator
+from pyspark import SparkContext 
 
 with DAG(
     "spark_test",
@@ -31,7 +32,8 @@ with DAG(
 
         print("1111111111111")
         
-        spark = SparkSession.builder.appName("sparktest").getOrCreate()
+        # spark = SparkSession.builder.appName("sparktest").getOrCreate()
+        spark = SparkContext.getOrCreate() 
         print("2222222222222222")
 
         df_test = pd.DataFrame({

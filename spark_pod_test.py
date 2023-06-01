@@ -49,7 +49,7 @@ default_args = {
     'email_on_failure': False,
     'email_on_retry': False,
     'max_active_runs': 1,
-    'retries': 3
+    'retries': 0
 }
 
 # configmaps = [
@@ -84,8 +84,8 @@ submit = SparkKubernetesOperator(
     kubernetes_conn_id="kubernetes-cluster-guru",
     # env_from=configmaps
     do_xcom_push=True,
-    dag=dag
-    # api_group="sparkoperator.hpe.com"
+    dag=dag,
+    api_group="sparkoperator.hpe.com"
     # enable_impersonation_from_ldap_user=False
 )
 
@@ -95,7 +95,7 @@ sensor = SparkKubernetesSensor(
     application_name="{{ task_instance.xcom_pull(task_ids='spark_hive_submit')['metadata']['name'] }}",
     kubernetes_conn_id="kubernetes-cluster-guru",
     dag=dag,
-    # api_group="sparkoperator.hpe.com",
+    api_group="sparkoperator.hpe.com",
     attach_log=True
 )
 

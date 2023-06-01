@@ -81,7 +81,7 @@ submit = SparkKubernetesOperator(
     task_id='spark_hive_submit',
     namespace="guru-tenant",
     application_file="hive_conn_spark.yaml",
-    # kubernetes_conn_id="kubernetes_default",
+    kubernetes_conn_id="kubernetes-cluster-guru",
     # env_from=configmaps
     do_xcom_push=True,
     dag=dag
@@ -93,7 +93,7 @@ sensor = SparkKubernetesSensor(
     task_id='spark_hive_monitor',
     namespace="guru-tenant",
     application_name="{{ task_instance.xcom_pull(task_ids='spark_hive_submit')['metadata']['name'] }}",
-    # kubernetes_conn_id="kubernetes_default",
+    kubernetes_conn_id="kubernetes-cluster-guru",
     dag=dag,
     # api_group="sparkoperator.hpe.com",
     attach_log=True

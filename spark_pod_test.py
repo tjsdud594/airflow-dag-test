@@ -70,9 +70,9 @@ submit = SparkKubernetesOperator(
     application_file="/root/yaml_files/spark_yaml/hive_conn_spark.yaml",
     kubernetes_conn_id="kubernetes_in_cluster",
     do_xcom_push=True,
-    dag=dag,
-    api_group="sparkoperator.hpe.com",
-    enable_impersonation_from_ldap_user=False
+    dag=dag
+    # api_group="sparkoperator.hpe.com"
+    # enable_impersonation_from_ldap_user=False
 )
 
 sensor = SparkKubernetesSensor(
@@ -81,7 +81,7 @@ sensor = SparkKubernetesSensor(
     application_name="{{ task_instance.xcom_pull(task_ids='spark_hive_submit')['metadata']['name'] }}",
     kubernetes_conn_id="kubernetes_in_cluster",
     dag=dag,
-    api_group="sparkoperator.hpe.com",
+    # api_group="sparkoperator.hpe.com",
     attach_log=True
 )
 

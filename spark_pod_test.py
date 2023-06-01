@@ -34,6 +34,7 @@ from airflow import DAG
 from airflow.providers.cncf.kubernetes.operators.spark_kubernetes import SparkKubernetesOperator
 from airflow.providers.cncf.kubernetes.sensors.spark_kubernetes import SparkKubernetesSensor
 from airflow.utils.dates import days_ago
+from kubernetes.client import models as k8s
 
 # [END import_module]
 
@@ -50,6 +51,13 @@ default_args = {
     'max_active_runs': 1,
     'retries': 3
 }
+
+volume = k8s.V1Volume(
+    name="airflow-volume",
+    persistent_volume_claim=k8s.V1PersistentVolumeClaimVolumeSource(claim_name="airflow-pvc"),
+)
+
+
 # [END default_args]
 
 # [START instantiate_dag]
@@ -61,13 +69,13 @@ dag = DAG(
     tags=['example']
 )
 
-spark_file = open(
-    "/home/hive_conn_spark.yaml").read()
+# spark_file = open(
+#     "hive_conn_spark.yaml").read()
 
 submit = SparkKubernetesOperator(
     task_id='spark_hive_submit',
     namespace="guru-tenant",
-    application_file=spark_file,
+    application_file="hive_conn_spark.yaml",
     kubernetes_conn_id="imguru",
     do_xcom_push=True,
     dag=dag

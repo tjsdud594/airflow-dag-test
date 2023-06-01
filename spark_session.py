@@ -31,7 +31,7 @@ with DAG(
 
         print("1111111111111")
         
-        spark = SparkSession.builder.master("local").appName("sparktest").getOrCreate()
+        spark = SparkSession.builder.appName("sparktest").getOrCreate()
         print("2222222222222222")
 
         df_test = pd.DataFrame({

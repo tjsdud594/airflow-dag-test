@@ -61,14 +61,14 @@ dag = DAG(
     tags=['example']
 )
 
-# spark = open(
-#     "example_spark_kubernetes_operator_pi.yaml").read()
+spark_file = open(
+    "/root/yaml_files/spark_yaml/hive_conn_spark.yaml").read()
 
 submit = SparkKubernetesOperator(
     task_id='spark_hive_submit',
     namespace="guru-tenant",
-    application_file="/root/yaml_files/spark_yaml/hive_conn_spark.yaml",
-    kubernetes_conn_id="kubernetes_in_cluster",
+    application_file=spark_file,
+    kubernetes_conn_id="imguru",
     do_xcom_push=True,
     dag=dag
     # api_group="sparkoperator.hpe.com"
@@ -77,9 +77,9 @@ submit = SparkKubernetesOperator(
 
 sensor = SparkKubernetesSensor(
     task_id='spark_hive_monitor',
-    namespace="sampletenant",
+    namespace="guru-tenant",
     application_name="{{ task_instance.xcom_pull(task_ids='spark_hive_submit')['metadata']['name'] }}",
-    kubernetes_conn_id="kubernetes_in_cluster",
+    kubernetes_conn_id="imguru",
     dag=dag,
     # api_group="sparkoperator.hpe.com",
     attach_log=True

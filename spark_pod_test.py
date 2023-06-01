@@ -52,6 +52,11 @@ default_args = {
     'retries': 3
 }
 
+# configmaps = [
+#     k8s.V1EnvFromSource(config_map_ref=k8s.V1ConfigMapEnvSource(name="kubernetes-admin")),
+#     k8s.V1EnvFromSource(config_map_ref=k8s.V1ConfigMapEnvSource(name="test-configmap-2")),
+# ]
+
 volume = k8s.V1Volume(
     name="airflow-volume",
     persistent_volume_claim=k8s.V1PersistentVolumeClaimVolumeSource(claim_name="airflow-pvc"),
@@ -76,7 +81,8 @@ submit = SparkKubernetesOperator(
     task_id='spark_hive_submit',
     namespace="guru-tenant",
     application_file="hive_conn_spark.yaml",
-    kubernetes_conn_id="kubernetes_default",
+    # kubernetes_conn_id="kubernetes_default",
+    # env_from=configmaps
     do_xcom_push=True,
     dag=dag
     # api_group="sparkoperator.hpe.com"
@@ -87,7 +93,7 @@ sensor = SparkKubernetesSensor(
     task_id='spark_hive_monitor',
     namespace="guru-tenant",
     application_name="{{ task_instance.xcom_pull(task_ids='spark_hive_submit')['metadata']['name'] }}",
-    kubernetes_conn_id="kubernetes_default",
+    # kubernetes_conn_id="kubernetes_default",
     dag=dag,
     # api_group="sparkoperator.hpe.com",
     attach_log=True

@@ -33,7 +33,7 @@ with DAG(
         print("1111111111111")
         
         # spark = SparkSession.builder.appName("sparktest").getOrCreate()
-        spark = SparkContext.getOrCreate() 
+        # spark = SparkContext.getOrCreate() 
         print("2222222222222222")
 
         df_test = pd.DataFrame({
@@ -43,11 +43,11 @@ with DAG(
         })
         print("3333333333333")
 
-        df_spark = spark.createDataFrame(df_test)
+        # df_spark = spark.createDataFrame(df_test)
         print("444444444")
 
-        df_spark.show()
-        df_test.head()
+        # df_spark.show()
+        # df_test.head()
         print("555555555")
 
     t1 = PythonOperator(task_id='task_1', python_callable=spark_job, dag=dag)

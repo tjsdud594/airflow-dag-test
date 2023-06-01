@@ -62,7 +62,7 @@ dag = DAG(
 )
 
 spark_file = open(
-    "/root/yaml_files/spark_yaml/hive_conn_spark.yaml").read()
+    "/home/spark_yaml/hive_conn_spark.yaml").read()
 
 submit = SparkKubernetesOperator(
     task_id='spark_hive_submit',

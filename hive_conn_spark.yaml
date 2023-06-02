@@ -1,7 +1,7 @@
 apiVersion: sparkoperator.hpe.com/v1beta2
 kind: SparkApplication
 metadata:
-  name: hivetest
+  name: hive-test-2
   namespace: guru-tenant
   resourceVersion: "710557"
 spec:

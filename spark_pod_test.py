@@ -80,8 +80,8 @@ submit = SparkKubernetesOperator(
     do_xcom_push=True,
     dag=dag,
     # service_account_name="hpe-guru-tenant",
-    # api_group="sparkoperator.hpe.com",
-    api_group="sparkoperator.k8s.io",
+    api_group="sparkoperator.hpe.com",
+    # api_group="sparkoperator.k8s.io",
     api_version="v1beta2"
     # enable_impersonation_from_ldap_user=False
 )
@@ -93,8 +93,8 @@ sensor = SparkKubernetesSensor(
     kubernetes_conn_id="guru2",
     dag=dag,
     # service_account_name="hpe-guru-tenant",
-    # api_group="sparkoperator.hpe.com",
-    api_group="sparkoperator.k8s.io",
+    api_group="sparkoperator.hpe.com",
+    # api_group="sparkoperator.k8s.io",
     attach_log=True
 )
 

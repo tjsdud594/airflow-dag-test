@@ -3,7 +3,7 @@ kind: SparkApplication
 metadata:
   name: hive-test-2
   namespace: guru-tenant
-  resourceVersion: "710557"
+  # resourceVersion: "710557"
 spec:
   deps:
     jars:

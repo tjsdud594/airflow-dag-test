@@ -36,16 +36,18 @@ from airflow import DAG
 from airflow.providers.trino.operators.trino import TrinoOperator
 from airflow.operators.python_operator import PythonOperator
 from airflow.utils.dates import days_ago
-from airflow import models
 
 # [END import_module]
 
+args = {'owner': 'syryu',
+        'start_date': days_ago(n=1)}
+
 # [START instantiate_dag]
 
-dag = models.DAG(
+dag = DAG(
     dag_id="example_trino",
+    default_args=args,
     schedule=None,  # Override to match your needs
-    start_date=days_ago(n=1),
     catchup=False,
     tags=["example"]
 )

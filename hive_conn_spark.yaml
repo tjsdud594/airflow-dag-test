@@ -15,8 +15,8 @@ spec:
       hpecp.hpe.com/dtap: hadoop2-job
       version: 3.3.1
     memory: 2G
-    # serviceAccount: hpe-guru-tenant
-    serviceAccount: airflow-worker
+    serviceAccount: hpe-guru-tenant
+    # serviceAccount: airflow-worker
     volumeMounts:
       - mountPath: /opt/mapr/spark/sparkhs-eventlog-storage
         name: sparkhs-eventlog-storage
@@ -28,8 +28,8 @@ spec:
       hpecp.hpe.com/dtap: hadoop2-job
       version: 3.3.1
     memory: 2G
-    # serviceAccount: hpe-guru-tenant
-    serviceAccount: airflow-worker
+    serviceAccount: hpe-guru-tenant
+    # serviceAccount: airflow-worker
   image: gcr.io/mapr-252711/spark-py-3.3.1:v3.3.1
   imagePullPolicy: IfNotPresent
   imagePullSecrets:

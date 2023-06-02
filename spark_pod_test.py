@@ -73,14 +73,14 @@ dag = DAG(
 
 submit = SparkKubernetesOperator(
     task_id='spark_hive_submit',
-    namespace="guru-tenant",
+    # namespace="guru-tenant",
     application_file="hive_conn_spark.yaml",
     kubernetes_conn_id="guru2",
     # env_from=configmaps
     do_xcom_push=True,
     dag=dag,
     # service_account_name="hpe-guru-tenant",
-    api_group="sparkoperator.hpe.com/v1beta2",
+    api_group="sparkoperator.hpe.com",
     # api_group="sparkoperator.k8s.io",
     api_version="v1beta2"
     # enable_impersonation_from_ldap_user=False

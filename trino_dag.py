@@ -55,7 +55,7 @@ trino_create_schema = TrinoOperator(
         task_id="trino_create_schema",
         trino_conn_id="trino_hive",
         sql=f"CREATE SCHEMA IF NOT EXISTS airflow_trino2",
-        handler=list,
+        handler=list
     )
 
 trino_create_table = TrinoOperator(
@@ -65,14 +65,14 @@ trino_create_table = TrinoOperator(
         cityid bigint,
         cityname varchar
         )""",
-        handler=list,
+        handler=list
     )
 
 trino_insert = TrinoOperator(
         task_id="trino_insert",
         trino_conn_id="trino_hive",
         sql=f"""INSERT INTO airflow_trino.test1 VALUES (2, 'San Francisco')""",
-        handler=list,
+        handler=list
     )
 
 trino_templated_query = TrinoOperator(
@@ -80,7 +80,7 @@ trino_templated_query = TrinoOperator(
         trino_conn_id="trino_hive",
         sql="SELECT * FROM {{ params.SCHEMA }}.{{ params.TABLE }}",
         handler=list,
-        params={"SCHEMA": "airflow_trino2", "TABLE": "test2"},
+        params={"SCHEMA": "airflow_trino2", "TABLE": "test2"}
     )
 
 

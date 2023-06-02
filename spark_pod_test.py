@@ -73,7 +73,7 @@ dag = DAG(
 
 submit = SparkKubernetesOperator(
     task_id='spark_hive_submit',
-    # namespace="guru-tenant",
+    namespace="guru-tenant",
     application_file="hive_conn_spark.yaml",
     kubernetes_conn_id="guru",
     # env_from=configmaps

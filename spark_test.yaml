@@ -17,7 +17,8 @@
 apiVersion: "sparkoperator.hpe.com/v1beta2"
 kind: SparkApplication
 metadata:
-  generateName: spark-pi-secure-
+  name: spark_scala_test
+  namespace: guru-tenant
 spec:
   sparkConf:
     # Note: If you are executing the application as a K8 user that MapR can verify,

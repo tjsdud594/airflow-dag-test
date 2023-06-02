@@ -87,8 +87,8 @@ submit = SparkKubernetesOperator(
     dag=dag,
     # service_account_name="hpe-guru-tenant",
     api_group="sparkoperator.hpe.com",
-    api_version="v1beta2"
-    # enable_impersonation_from_ldap_user=False
+    api_version="v1beta2",
+    enable_impersonation_from_ldap_user=False
 )
 
 sensor = SparkKubernetesSensor(

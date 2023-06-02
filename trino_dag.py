@@ -40,29 +40,14 @@ from airflow import models
 
 # [END import_module]
 
-# [START default_args]
-# These args will get passed on to each operator
-# You can override them on a per-task basis during operator initialization
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'start_date': days_ago(1),
-    'email': ['airflow@example.com'],
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'max_active_runs': 1,
-    'retries': 0
-}
-
-# [END default_args]
-
 # [START instantiate_dag]
 
 dag = models.DAG(
-    dag_id='trino_test',
-    default_args=default_args,
-    schedule_interval=timedelta(days=1),
-    tags=['example']
+    dag_id="example_trino",
+    schedule="@once",  # Override to match your needs
+    start_date=datetime(2022, 1, 1),
+    catchup=False,
+    tags=["example"]
 )
 
 def trino_job_print(sql, **kwargs):

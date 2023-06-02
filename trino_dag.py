@@ -61,7 +61,7 @@ def trino_job_print(sql, **kwargs):
 trino_create_schema = TrinoOperator(
         task_id="trino_create_schema",
         trino_conn_id="trino_hive",
-        sql=f"CREATE SCHEMA IF NOT EXISTS airflow_trino;",
+        sql=f"CREATE SCHEMA IF NOT EXISTS airflow_trino",
         handler=list,
     )
 
@@ -92,7 +92,7 @@ t2 = PythonOperator(task_id='task_2',
 trino_insert = TrinoOperator(
         task_id="trino_insert",
         trino_conn_id="trino_hive",
-        sql=f"""INSERT INTO airflow_trino.test1 VALUES (1, 'San Francisco');""",
+        sql=f"""INSERT INTO airflow_trino.test1 VALUES (1, 'San Francisco')""",
         handler=list,
     )
 

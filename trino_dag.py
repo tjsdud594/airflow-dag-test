@@ -64,13 +64,6 @@ trino_create_schema = TrinoOperator(
         sql=f"CREATE SCHEMA IF NOT EXISTS airflow_trino",
         handler=list,
     )
-
-t1 = PythonOperator(task_id='task_1',
-                    provide_context=True,
-                    python_callable=trino_job_print,
-                    op_kwargs={'sql': 'CREATE SCHEMA IF NOT EXISTS airflow_trino;'},
-                    dag=dag)
-
 trino_create_table = TrinoOperator(
         task_id="trino_create_table",
         trino_conn_id="trino_hive",
@@ -81,26 +74,12 @@ trino_create_table = TrinoOperator(
         handler=list,
     )
 
-
-t2 = PythonOperator(task_id='task_2',
-                    provide_context=True,
-                    python_callable=trino_job_print,
-                    op_kwargs={'sql': 'CREATE TABLE IF NOT EXISTS airflow_trino.test1'},
-                    dag=dag)
-
-
 trino_insert = TrinoOperator(
         task_id="trino_insert",
         trino_conn_id="trino_hive",
         sql=f"""INSERT INTO airflow_trino.test1 VALUES (1, 'San Francisco')""",
         handler=list,
     )
-
-t3 = PythonOperator(task_id='task_3',
-                    provide_context=True,
-                    python_callable=trino_job_print,
-                    op_kwargs={'sql': 'INSERT INTO airflow_trino.test1 VALUES (1, "San Francisco")'},
-                    dag=dag)
 
 trino_templated_query = TrinoOperator(
         task_id="trino_templated_query",
@@ -110,10 +89,5 @@ trino_templated_query = TrinoOperator(
         params={"SCHEMA": "airflow_trino", "TABLE": "test1"},
     )
 
-t4 = PythonOperator(task_id='task_4',
-                    provide_context=True,
-                    python_callable=trino_job_print,
-                    op_kwargs={'sql': 'SELECT * FROM airflow_trino.test1'},
-                    dag=dag)
 
-trino_create_schema >> t1 >> trino_create_table >> t2 >> trino_insert >> t3 >> trino_templated_query >> t4
+trino_create_schema >> trino_create_table >> trino_insert >>trino_templated_query

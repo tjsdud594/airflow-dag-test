@@ -44,50 +44,45 @@ args = {'owner': 'syryu',
 
 # [START instantiate_dag]
 
-dag = DAG(
+with DAG(
     dag_id="example_trino",
     default_args=args,
     schedule=None,  # Override to match your needs
     catchup=False,
     tags=["example"]
-)
+) as dag:
+    
+    trino_create_schema = TrinoOperator(
+            task_id="trino_create_schema",
+            trino_conn_id="trino_hive",
+            sql=f"CREATE SCHEMA IF NOT EXISTS airflow_trino2",
+            handler=list
+        )
 
+    trino_create_table = TrinoOperator(
+            task_id="trino_create_table",
+            trino_conn_id="trino_hive",
+            sql=f"""CREATE TABLE IF NOT EXISTS airflow_trino.test2(
+            cityid bigint,
+            cityname varchar
+            )""",
+            handler=list
+        )
 
-trino_create_schema = TrinoOperator(
-        task_id="trino_create_schema",
-        dag=dag,
-        trino_conn_id="trino_hive",
-        sql=f"CREATE SCHEMA IF NOT EXISTS airflow_trino2",
-        handler=list
-    )
+    trino_insert = TrinoOperator(
+            task_id="trino_insert",
+            trino_conn_id="trino_hive",
+            sql=f"""INSERT INTO airflow_trino.test1 VALUES (2, 'San Francisco')""",
+            handler=list
+        )
 
-trino_create_table = TrinoOperator(
-        task_id="trino_create_table",
-        dag=dag,
-        trino_conn_id="trino_hive",
-        sql=f"""CREATE TABLE IF NOT EXISTS airflow_trino.test2(
-        cityid bigint,
-        cityname varchar
-        )""",
-        handler=list
-    )
-
-trino_insert = TrinoOperator(
-        task_id="trino_insert",
-        dag=dag,
-        trino_conn_id="trino_hive",
-        sql=f"""INSERT INTO airflow_trino.test1 VALUES (2, 'San Francisco')""",
-        handler=list
-    )
-
-trino_templated_query = TrinoOperator(
-        task_id="trino_templated_query",
-        dag=dag,
-        trino_conn_id="trino_hive",
-        sql="SELECT * FROM {{ params.SCHEMA }}.{{ params.TABLE }}",
-        handler=list,
-        params={"SCHEMA": "airflow_trino2", "TABLE": "test2"}
-    )
+    trino_templated_query = TrinoOperator(
+            task_id="trino_templated_query",
+            trino_conn_id="trino_hive",
+            sql="SELECT * FROM {{ params.SCHEMA }}.{{ params.TABLE }}",
+            handler=list,
+            params={"SCHEMA": "airflow_trino2", "TABLE": "test2"}
+        )
 
 
 trino_create_schema >> trino_create_table >> trino_insert >> trino_templated_query

@@ -44,8 +44,8 @@ from airflow import models
 
 dag = models.DAG(
     dag_id="example_trino",
-    schedule="@once",  # Override to match your needs
-    start_date=datetime(2022, 1, 1),
+    schedule=None,  # Override to match your needs
+    start_date=days_ago(n=1),
     catchup=False,
     tags=["example"]
 )

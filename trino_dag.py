@@ -38,6 +38,8 @@ from airflow.operators.python_operator import PythonOperator
 from airflow.utils.dates import days_ago
 from airflow import models
 
+import random
+
 # [END import_module]
 
 # [START instantiate_dag]
@@ -50,24 +52,18 @@ dag = models.DAG(
     tags=["example"]
 )
 
-def trino_job_print(sql, **kwargs):
-    print('=' * 60)
-    print('fruit_name:', sql, '\n finished')
-    print('=' * 60)
-    print(kwargs)
-    print('=' * 60)
-    return 'print complete!!!'
+x = random.randint(10, 9999)
 
 trino_create_schema = TrinoOperator(
         task_id="trino_create_schema",
         trino_conn_id="trino_hive",
-        sql=f"CREATE SCHEMA IF NOT EXISTS airflow_trino",
+        sql=f"CREATE SCHEMA IF NOT EXISTS airflow_trino{x}",
         handler=list,
     )
 trino_create_table = TrinoOperator(
         task_id="trino_create_table",
         trino_conn_id="trino_hive",
-        sql=f"""CREATE TABLE IF NOT EXISTS airflow_trino.test1(
+        sql=f"""CREATE TABLE IF NOT EXISTS airflow_trino.test{x}(
         cityid bigint,
         cityname varchar
         )""",
@@ -77,7 +73,7 @@ trino_create_table = TrinoOperator(
 trino_insert = TrinoOperator(
         task_id="trino_insert",
         trino_conn_id="trino_hive",
-        sql=f"""INSERT INTO airflow_trino.test1 VALUES (1, 'San Francisco')""",
+        sql=f"""INSERT INTO airflow_trino.test1 VALUES ({x}, 'San Francisco')""",
         handler=list,
     )
 
@@ -86,7 +82,7 @@ trino_templated_query = TrinoOperator(
         trino_conn_id="trino_hive",
         sql="SELECT * FROM {{ params.SCHEMA }}.{{ params.TABLE }}",
         handler=list,
-        params={"SCHEMA": "airflow_trino", "TABLE": "test1"},
+        params={"SCHEMA": "airflow_trino{x}", "TABLE": "test{x}"},
     )
 
 

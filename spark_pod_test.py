@@ -94,9 +94,9 @@ sensor = SparkKubernetesSensor(
     kubernetes_conn_id="guru",
     dag=dag,
     # service_account_name="hpe-guru-tenant",
-    api_group="sparkoperator.hpe.com",
+    api_group="sparkoperator.hpe.com"
     # api_group="sparkoperator.k8s.io",
-    attach_log=True
+    # attach_log=True
 )
 
 submit >> sensor

@@ -37,7 +37,7 @@ spec:
   imagePullPolicy: IfNotPresent
   imagePullSecrets:
     - imagepull
-  mainApplicationFile: local:///opt/mapr/spark/file-storage/hive_test3.py
+  mainApplicationFile: file:///opt/mapr/spark/file-storage/hive_test3.py
   mode: cluster
   restartPolicy:
     type: Never

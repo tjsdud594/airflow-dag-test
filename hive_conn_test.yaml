@@ -43,13 +43,17 @@ spec:
     type: Never
   sparkConf:
     spark.eventLog.enabled: "true"
-    spark.hadoop.fs.dtap.impl.disable.cache: "false"
-    spark.hadoop.fs.AbstractFileSystem.dtap.impl: com.bluedata.hadoop.bdfs.BdAbstractFS
-    spark.hadoop.fs.dtap.impl: com.bluedata.hadoop.bdfs.Bdfs
+    # spark.hadoop.fs.dtap.impl.disable.cache: "false"
+    # spark.hadoop.fs.AbstractFileSystem.dtap.impl: com.bluedata.hadoop.bdfs.BdAbstractFS
+    # spark.hadoop.fs.dtap.impl: com.bluedata.hadoop.bdfs.Bdfs
     # spark.driver.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
     # spark.executor.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
     spark.eventLog.dir: file:///opt/mapr/spark/sparkhs-eventlog-storage
-    spark.kubernetes.file.upload.path: file:///opt/mapr/spark/hive_test3.py
+    spark.hadoop.fs.s3a.endpoint: http://114.202.139.172:8888
+    spark.kubernetes.file.upload.path: s3a://imgr-buc-inner/spark-file/hive_test3.py
+    spark.hadoop.fs.s3a.access.key: "minioadmin"
+    spark.hadoop.fs.s3a.secret.key: "minioadmin"
+    spark.hadoop.fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
     spark.mapr.user.secret: mapr-user-secret-spark-thrift
     spark.mapr.user.secret.autogen: "true"
   sparkVersion: 3.3.1

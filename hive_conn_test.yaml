@@ -21,8 +21,8 @@ spec:
       - mountPath: /opt/mapr/spark/sparkhs-eventlog-storage
         name: sparkhs-eventlog-storage
       # - mountPath: /opt/mapr/spark/file-storage
-      - mountPath: /opt/mapr/spark/work-dir
-        name: spark-file-storage
+      # - mountPath: /opt/mapr/spark/work-dir
+      #   name: spark-file-storage
     # mainApplicationFile: /opt/mapr/spark/file-storage/hive_test3.py
   executor:
     coreLimit: "2"
@@ -46,7 +46,7 @@ spec:
     - imagepull
   # mainApplicationFile: local:///opt/bluedata/share/guru-tenant/airflow-spark/hive_test3.py
   # mainApplicationFile: /opt/mapr/spark/file-storage/hive_test3.py
-  mainApplicationFile: hive_test3.py
+  mainApplicationFile: s3a://imgr-buc-inner/spark-file/hive_test3.py
   mode: cluster
   restartPolicy:
     type: Never
@@ -58,12 +58,12 @@ spec:
     # # spark.driver.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
     # # spark.executor.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
     # # spark.eventLog.dir: file:///opt/mapr/spark/sparkhs-eventlog-storage
-    # # spark.hadoop.fs.s3a.endpoint: http://114.202.139.172:8888
-    # # spark.kubernetes.file.upload.path: s3a://imgr-buc-inner/spark-file/hive_test3.py
-    spark.kubernetes.file.upload.path: file:///opt/mapr/spark/work-dir
-    # # spark.hadoop.fs.s3a.access.key: "minioadmin"
-    # # spark.hadoop.fs.s3a.secret.key: "minioadmin"
-    # # spark.hadoop.fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
+    spark.hadoop.fs.s3a.endpoint: http://114.202.139.172:8888
+    # spark.kubernetes.file.upload.path: s3a://imgr-buc-inner/spark-file/hive_test3.py
+    # spark.kubernetes.file.upload.path: file:///opt/mapr/spark/work-dir
+    spark.hadoop.fs.s3a.access.key: "minioadmin"
+    spark.hadoop.fs.s3a.secret.key: "minioadmin"
+    spark.hadoop.fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
     spark.mapr.user.secret: mapr-user-secret-spark-thrift
     spark.mapr.user.secret.autogen: "true"
   sparkVersion: 3.3.1
@@ -72,6 +72,6 @@ spec:
     - name: sparkhs-eventlog-storage
       persistentVolumeClaim:
         claimName: sparkhs-pvc
-    - name: spark-file-storage
-      persistentVolumeClaim:
-        claimName: airflow-pvc
+    # - name: spark-file-storage
+    #   persistentVolumeClaim:
+    #     claimName: airflow-pvc

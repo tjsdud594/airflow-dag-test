@@ -5,9 +5,9 @@ metadata:
   namespace: guru-tenant
   # resourceVersion: "710557"
 spec:
-  deps:
-    jars:
-      - local:///opt/bdfs/bluedata-dtap.jar
+  # deps:
+    # jars:
+      # - local:///opt/bdfs/bluedata-dtap.jar
   driver:
     coreLimit: "1"
     cores: 1
@@ -20,6 +20,8 @@ spec:
     volumeMounts:
       - mountPath: /opt/mapr/spark/sparkhs-eventlog-storage
         name: sparkhs-eventlog-storage
+      - mountPath: /opt/mapr/spark/file-storage
+        name: spark-file-storage
   executor:
     coreLimit: "2"
     cores: 2
@@ -35,17 +37,17 @@ spec:
   imagePullPolicy: IfNotPresent
   imagePullSecrets:
     - imagepull
-  mainApplicationFile: dtap://nfs1/hive_test3.py
+  mainApplicationFile: /opt/mapr/spark/file-storage/hive_test3.py
   mode: cluster
   restartPolicy:
     type: Never
   sparkConf:
     spark.eventLog.enabled: "true"
-    spark.hadoop.fs.dtap.impl.disable.cache: "false"
-    spark.hadoop.fs.AbstractFileSystem.dtap.impl: com.bluedata.hadoop.bdfs.BdAbstractFS
-    spark.hadoop.fs.dtap.impl: com.bluedata.hadoop.bdfs.Bdfs
-    spark.driver.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
-    spark.executor.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
+    # spark.hadoop.fs.dtap.impl.disable.cache: "false"
+    # spark.hadoop.fs.AbstractFileSystem.dtap.impl: com.bluedata.hadoop.bdfs.BdAbstractFS
+    # spark.hadoop.fs.dtap.impl: com.bluedata.hadoop.bdfs.Bdfs
+    # spark.driver.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
+    # spark.executor.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
     spark.eventLog.dir: file:///opt/mapr/spark/sparkhs-eventlog-storage
     spark.mapr.user.secret: mapr-user-secret-spark-thrift
     spark.mapr.user.secret.autogen: "false"
@@ -55,3 +57,6 @@ spec:
     - name: sparkhs-eventlog-storage
       persistentVolumeClaim:
         claimName: sparkhs-pvc
+    - name: spark-file-storage
+      persistentVolumeClaim:
+        claimName: airflow-pvc

@@ -47,7 +47,7 @@ spec:
     spark.hadoop.fs.AbstractFileSystem.dtap.impl: com.bluedata.hadoop.bdfs.BdAbstractFS
     spark.hadoop.fs.dtap.impl: com.bluedata.hadoop.bdfs.Bdfs
     spark.hadoop.fs.dtap.impl.disable.cache: "false"
-    spark.mapr.user.secret: hpe-autotix-generated-secret-hirbfm
+    # spark.mapr.user.secret: hpe-autotix-generated-secret-hirbfm
     spark.mapr.user.secret.autogen: "true"
     # spark.mapr.user.secret.autogen: "false"
   sparkVersion: 3.3.1

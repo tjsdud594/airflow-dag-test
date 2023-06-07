@@ -49,8 +49,8 @@ spec:
     # spark.driver.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
     # spark.executor.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
     spark.eventLog.dir: file:///opt/mapr/spark/sparkhs-eventlog-storage
-    # spark.mapr.user.secret: mapr-user-secret-spark-thrift
-    # spark.mapr.user.secret.autogen: "false"
+    spark.mapr.user.secret: mapr-user-secret-spark-thrift
+    spark.mapr.user.secret.autogen: "true"
   sparkVersion: 3.3.1
   type: Python
   volumes:

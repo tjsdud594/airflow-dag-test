@@ -42,7 +42,7 @@ spec:
   imagePullPolicy: IfNotPresent
   imagePullSecrets:
     - imagepull
-  mainApplicationFile: file:///opt/mapr/spark/sparkhs-eventlog-storage/hive_test3.py
+  mainApplicationFile: local:///opt/bluedata/share/guru-tenant/airflow-spark/hive_test3.py
   mode: cluster
   restartPolicy:
     type: Never

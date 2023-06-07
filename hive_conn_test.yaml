@@ -17,9 +17,9 @@ spec:
     memory: 2G
     serviceAccount: hpe-guru-tenant
     # serviceAccount: airflow-worker
-    # volumeMounts:
-    #   - mountPath: /opt/mapr/spark/sparkhs-eventlog-storage
-    #     name: sparkhs-eventlog-storage
+    volumeMounts:
+      - mountPath: /opt/mapr/spark/sparkhs-eventlog-storage
+        name: sparkhs-eventlog-storage
   executor:
     coreLimit: "2"
     cores: 2
@@ -40,17 +40,17 @@ spec:
     type: Never
   sparkConf:
     spark.driver.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
-    # spark.eventLog.dir: file:///opt/mapr/spark/sparkhs-eventlog-storage
-    # spark.eventLog.enabled: "true"
+    spark.eventLog.dir: file:///opt/mapr/spark/sparkhs-eventlog-storage
+    spark.eventLog.enabled: "true"
     spark.executor.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
-    # spark.hadoop.fs.AbstractFileSystem.dtap.impl: com.bluedata.hadoop.bdfs.BdAbstractFS
-    # spark.hadoop.fs.dtap.impl: com.bluedata.hadoop.bdfs.Bdfs
-    # spark.hadoop.fs.dtap.impl.disable.cache: "false"
-    # spark.mapr.user.secret: hpe-autotix-generated-secret-hirbfm
-    # spark.mapr.user.secret.autogen: "true"
+    spark.hadoop.fs.AbstractFileSystem.dtap.impl: com.bluedata.hadoop.bdfs.BdAbstractFS
+    spark.hadoop.fs.dtap.impl: com.bluedata.hadoop.bdfs.Bdfs
+    spark.hadoop.fs.dtap.impl.disable.cache: "false"
+    spark.mapr.user.secret: hpe-autotix-generated-secret-hirbfm
+    spark.mapr.user.secret.autogen: "true"
   sparkVersion: 3.3.1
   type: Python
-  # volumes:
-  #   - name: sparkhs-eventlog-storage
-  #     persistentVolumeClaim:
-  #       claimName: sparkhs-pvc
+  volumes:
+    - name: sparkhs-eventlog-storage
+      persistentVolumeClaim:
+        claimName: sparkhs-pvc

@@ -50,7 +50,7 @@ spec:
     # spark.mapr.user.secret: hpe-autotix-generated-secret-hirbfm
     spark.mapr.user.secret: mapr-user-secret-spark-thrift
     # spark.mapr.user.secret.autogen: "true"
-    # spark.mapr.user.secret.autogen: "false"
+    spark.mapr.user.secret.autogen: "false"
   sparkVersion: 3.3.1
   type: Python
   # volumes:

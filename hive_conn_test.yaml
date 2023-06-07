@@ -17,9 +17,9 @@ spec:
     memory: 2G
     serviceAccount: hpe-guru-tenant
     # serviceAccount: airflow-worker
-    volumeMounts:
-      - mountPath: /opt/mapr/spark/sparkhs-eventlog-storage
-        name: sparkhs-eventlog-storage
+    # volumeMounts:
+    #   - mountPath: /opt/mapr/spark/sparkhs-eventlog-storage
+    #     name: sparkhs-eventlog-storage
       # - mountPath: /opt/mapr/spark/file-storage
       # - mountPath: /opt/mapr/spark/work-dir
       #   name: spark-file-storage
@@ -68,10 +68,10 @@ spec:
     spark.mapr.user.secret.autogen: "true"
   sparkVersion: 3.3.1
   type: Python
-  volumes:
-    - name: sparkhs-eventlog-storage
-      persistentVolumeClaim:
-        claimName: sparkhs-pvc
+  # volumes:
+  #   - name: sparkhs-eventlog-storage
+  #     persistentVolumeClaim:
+  #       claimName: sparkhs-pvc
     # - name: spark-file-storage
     #   persistentVolumeClaim:
     #     claimName: airflow-pvc

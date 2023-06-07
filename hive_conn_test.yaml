@@ -20,8 +20,8 @@ spec:
     volumeMounts:
       - mountPath: /opt/mapr/spark/sparkhs-eventlog-storage
         name: sparkhs-eventlog-storage
-      - mountPath: /opt/mapr/spark/file-storage
-        name: spark-file-storage
+      # - mountPath: /opt/mapr/spark/file-storage
+      #   name: spark-file-storage
   executor:
     coreLimit: "2"
     cores: 2
@@ -33,8 +33,8 @@ spec:
     serviceAccount: hpe-guru-tenant
     # serviceAccount: airflow-worker
     volumeMounts:
-      - mountPath: /opt/mapr/spark/sparkhs-eventlog-storage
-        name: sparkhs-eventlog-storage
+      # - mountPath: /opt/mapr/spark/sparkhs-eventlog-storage
+      #   name: sparkhs-eventlog-storage
       - mountPath: /opt/mapr/spark/file-storage
         name: spark-file-storage
   image: gcr.io/mapr-252711/spark-py-3.3.1:v3.3.1

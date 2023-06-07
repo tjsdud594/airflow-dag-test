@@ -42,7 +42,7 @@ spec:
   restartPolicy:
     type: Never
   sparkConf:
-    spark.eventLog.enabled: "true"
+    # spark.eventLog.enabled: "true"
     # spark.hadoop.fs.dtap.impl.disable.cache: "false"
     # spark.hadoop.fs.AbstractFileSystem.dtap.impl: com.bluedata.hadoop.bdfs.BdAbstractFS
     # spark.hadoop.fs.dtap.impl: com.bluedata.hadoop.bdfs.Bdfs

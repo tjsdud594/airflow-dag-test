@@ -64,7 +64,8 @@ spec:
     spark.hadoop.fs.s3a.access.key: "minioadmin"
     spark.hadoop.fs.s3a.secret.key: "minioadmin"
     spark.hadoop.fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
-    spark.mapr.user.secret: mapr-user-secret-spark-thrift
+    # spark.mapr.user.secret: mapr-user-secret-spark-thrift
+    spark.mapr.user.secret: user
     spark.mapr.user.secret.autogen: "true"
   sparkVersion: 3.3.1
   type: Python

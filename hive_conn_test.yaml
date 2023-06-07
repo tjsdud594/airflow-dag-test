@@ -22,7 +22,7 @@ spec:
         name: sparkhs-eventlog-storage
       - mountPath: /opt/mapr/spark/file-storage
         name: spark-file-storage
-    mainApplicationFile: /opt/mapr/spark/file-storage/hive_test3.py
+    # mainApplicationFile: /opt/mapr/spark/file-storage/hive_test3.py
   executor:
     coreLimit: "2"
     cores: 2
@@ -44,6 +44,7 @@ spec:
   imagePullSecrets:
     - imagepull
   # mainApplicationFile: local:///opt/bluedata/share/guru-tenant/airflow-spark/hive_test3.py
+  mainApplicationFile: /opt/mapr/spark/file-storage/hive_test3.py
   mode: cluster
   restartPolicy:
     type: Never

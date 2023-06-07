@@ -39,8 +39,8 @@ spec:
     #   #   name: sparkhs-eventlog-storage
     #   - mountPath: /opt/mapr/spark/file-storage
     #     name: spark-file-storage
-  # image: gcr.io/mapr-252711/spark-py-3.3.1:v3.3.1
-  image: docker.io/apache/spark-py:v3.3.1
+  image: gcr.io/mapr-252711/spark-py-3.3.1:v3.3.1
+  # image: docker.io/apache/spark-py:v3.3.1
   imagePullPolicy: IfNotPresent
   imagePullSecrets:
     - imagepull

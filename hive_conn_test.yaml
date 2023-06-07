@@ -45,7 +45,7 @@ spec:
     spark.eventLog.enabled: "true"
     spark.executor.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
     spark.hadoop.fs.AbstractFileSystem.dtap.impl: com.bluedata.hadoop.bdfs.BdAbstractFS
-    spark.hadoop.fs.dtap.impl: com.bluedata.hadoop.bdfs.Bdfs
+    # spark.hadoop.fs.dtap.impl: com.bluedata.hadoop.bdfs.Bdfs
     spark.hadoop.fs.dtap.impl.disable.cache: "false"
     # spark.mapr.user.secret: hpe-autotix-generated-secret-hirbfm
     spark.mapr.user.secret: mapr-user-secret-spark-thrift

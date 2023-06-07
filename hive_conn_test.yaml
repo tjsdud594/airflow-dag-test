@@ -44,12 +44,12 @@ spec:
     spark.eventLog.dir: file:///opt/mapr/spark/sparkhs-eventlog-storage
     spark.eventLog.enabled: "true"
     spark.executor.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
-    # spark.hadoop.fs.AbstractFileSystem.dtap.impl: com.bluedata.hadoop.bdfs.BdAbstractFS
-    # spark.hadoop.fs.dtap.impl: com.bluedata.hadoop.bdfs.Bdfs
-    # spark.hadoop.fs.dtap.impl.disable.cache: "false"
-    # spark.mapr.user.secret: hpe-autotix-generated-secret-hirbfm
-    # spark.mapr.user.secret.autogen: "true"
-    spark.mapr.user.secret.autogen: "false"
+    spark.hadoop.fs.AbstractFileSystem.dtap.impl: com.bluedata.hadoop.bdfs.BdAbstractFS
+    spark.hadoop.fs.dtap.impl: com.bluedata.hadoop.bdfs.Bdfs
+    spark.hadoop.fs.dtap.impl.disable.cache: "false"
+    spark.mapr.user.secret: hpe-autotix-generated-secret-hirbfm
+    spark.mapr.user.secret.autogen: "true"
+    # spark.mapr.user.secret.autogen: "false"
   sparkVersion: 3.3.1
   type: Python
   volumes:

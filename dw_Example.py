@@ -81,6 +81,10 @@ s3_client = boto3.client(service_name, endpoint_url=endpoint_url, aws_access_key
 Bucket = "imgr-buc-inner"
 Key = "trino_sql/tier2_join.sql"
 
+
+print(type(get_file_from_s3(s3_client, Bucket, Key)))
+print(get_file_from_s3(s3_client, Bucket, Key))
+
 # [START default_args]
 # These args will get passed on to each operator
 # You can override them on a per-task basis during operator initialization
@@ -125,7 +129,7 @@ t0 = SparkKubernetesOperator(
 t0_sensor = SparkKubernetesSensor(
     task_id='Tier_0_monitor',
     namespace="guru-tenant",
-    application_name="{{ task_instance.xcom_pull(task_ids='Tier_0')['metadata']['name'] }}",
+    application_name="{{ task_instance.xcom_pull(task_ids='Tier_0_spark')['metadata']['name'] }}",
     kubernetes_conn_id="guru",
     dag=dag,
     api_group="sparkoperator.hpe.com"
@@ -145,7 +149,7 @@ t1 = SparkKubernetesOperator(
 t1_sensor = SparkKubernetesSensor(
     task_id='Tier_1_monitor',
     namespace="guru-tenant",
-    application_name="{{ task_instance.xcom_pull(task_ids='Tier_0')['metadata']['name'] }}",
+    application_name="{{ task_instance.xcom_pull(task_ids='Tier_1_spark')['metadata']['name'] }}",
     kubernetes_conn_id="guru",
     dag=dag,
     api_group="sparkoperator.hpe.com"
@@ -154,7 +158,7 @@ t1_sensor = SparkKubernetesSensor(
 t2 = TrinoOperator(
         task_id="Tier_2_trino",
         trino_conn_id="trino_hive",
-        sql=get_file_from_s3(s3_client, Bucket, Key),
+        sql=str(get_file_from_s3(s3_client, Bucket, Key)),
         dag=dag,
         handler=list
     )

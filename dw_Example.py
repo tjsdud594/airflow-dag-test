@@ -71,7 +71,7 @@ dag = DAG(
 t0 = SparkKubernetesOperator(
     task_id='Tier_0',
     namespace="guru-tenant",
-    application_file="hive_conn_test.yaml",
+    application_file="t0_spark.yaml",
     kubernetes_conn_id="guru",
     do_xcom_push=True,
     dag=dag,
@@ -88,4 +88,24 @@ t0_sensor = SparkKubernetesSensor(
     api_group="sparkoperator.hpe.com"
 )
 
-t0 >> t0_sensor
+t1 = SparkKubernetesOperator(
+    task_id='Tier_1',
+    namespace="guru-tenant",
+    application_file="t1_spark.yaml",
+    kubernetes_conn_id="guru",
+    do_xcom_push=True,
+    dag=dag,
+    api_group="sparkoperator.hpe.com",
+    api_version="v1beta2"
+)
+
+t1_sensor = SparkKubernetesSensor(
+    task_id='Tier_1_monitor',
+    namespace="guru-tenant",
+    application_name="{{ task_instance.xcom_pull(task_ids='Tier_0')['metadata']['name'] }}",
+    kubernetes_conn_id="guru",
+    dag=dag,
+    api_group="sparkoperator.hpe.com"
+)
+
+t0 >> t0_sensor >> t1 >> t1_sensor

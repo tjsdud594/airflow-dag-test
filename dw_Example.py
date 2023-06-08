@@ -155,6 +155,7 @@ t2 = TrinoOperator(
         task_id="Tier_2_trino",
         trino_conn_id="trino_hive",
         sql=get_file_from_s3(s3_client, Bucket, Key),
+        dag=dag,
         handler=list
     )
 

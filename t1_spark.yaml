@@ -8,12 +8,12 @@ spec:
     # jars:
       # - local:///opt/bdfs/bluedata-dtap.jar
   driver:
-    coreLimit: "1"
-    cores: 1
+    coreLimit: "3"
+    cores: 3
     labels:
       # hpecp.hpe.com/dtap: hadoop2-job
       version: 3.3.1
-    memory: 4G
+    memory: 6G
     serviceAccount: hpe-guru-tenant
     # volumeMounts:
     #   - mountPath: /opt/mapr/spark/sparkhs-eventlog-storage

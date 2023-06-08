@@ -71,7 +71,13 @@ def get_file_from_s3(s3_client, Bucket, Key) -> Dict:
         raise e
     return file
 
-s3_client = boto3.client("s3")
+service_name = 's3'
+endpoint_url = 'http://114.202.139.172:8888'
+access_key = 'minioadmin'
+secret_key = 'minioadmin'
+
+s3_client = boto3.client(service_name, endpoint_url=endpoint_url, aws_access_key_id=access_key,
+                      aws_secret_access_key=secret_key)
 Bucket = "imgr-buc-inner"
 Key = "trino_sql/tier2_join.sql"
 

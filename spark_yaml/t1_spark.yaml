@@ -49,7 +49,8 @@ spec:
     spark.hadoop.fs.s3a.access.key: "minioadmin"
     spark.hadoop.fs.s3a.secret.key: "minioadmin"
     spark.hadoop.fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem
-    spark.mapr.user.secret: hpe-autotix-generated-secret-iocwgg
+    # spark.mapr.user.secret: hpe-autotix-generated-secret-iocwgg
+    spark.mapr.user.secret: airflow-mapr-user
   sparkVersion: 3.3.1
   type: Python
   # volumes:

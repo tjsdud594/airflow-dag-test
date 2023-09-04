@@ -45,7 +45,7 @@ spec:
     type: Never
   sparkConf:
     spark.eventLog.enabled: "true"
-    spark.hadoop.fs.s3a.endpoint: http://114.202.139.172:8888
+    spark.hadoop.fs.s3a.endpoint: http://<IP or host>:8888
     spark.hadoop.fs.s3a.access.key: "minioadmin"
     spark.hadoop.fs.s3a.secret.key: "minioadmin"
     spark.hadoop.fs.s3a.impl: org.apache.hadoop.fs.s3a.S3AFileSystem

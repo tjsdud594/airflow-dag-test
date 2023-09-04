@@ -58,7 +58,7 @@ spec:
     # # spark.driver.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
     # # spark.executor.extraClassPath: local:///opt/bdfs/bluedata-dtap.jar
     # # spark.eventLog.dir: file:///opt/mapr/spark/sparkhs-eventlog-storage
-    spark.hadoop.fs.s3a.endpoint: http://114.202.139.172:8888
+    spark.hadoop.fs.s3a.endpoint: http://<IP or host>:8888
     # spark.kubernetes.file.upload.path: s3a://imgr-buc-inner/spark-file/hive_test3.py
     # spark.kubernetes.file.upload.path: file:///opt/mapr/spark/work-dir
     spark.hadoop.fs.s3a.access.key: "minioadmin"
